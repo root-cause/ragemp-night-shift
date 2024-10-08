@@ -1,0 +1,21 @@
+{
+  "name": "ragemp-night-shift",
+  "version": "1.0.0",
+  "description": "A survival gamemode for RAGE Multiplayer.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/root-cause/ragemp-night-shift.git"
+  },
+  "author": "rootcause",
+  "license": "MIT",
+  "scripts": {
+    "bundle-server": "npx esbuild src/serverside/index.js --outfile=dist/packages/nightshift/index.js --bundle --minify --platform=node --charset=utf8",
+    "bundle-client": "npx esbuild src/clientside/index.js --outfile=dist/client_packages/index.js --bundle --minify --platform=node --charset=utf8 --external:timerbars"
+  },
+  "homepage": "https://github.com/root-cause/ragemp-night-shift#readme",
+  "devDependencies": {
+    "@ragempcommunity/types-client": "github:ragempcommunity/ragemp-types#types-client",
+    "@ragempcommunity/types-server": "github:ragempcommunity/ragemp-types#types-server",
+    "esbuild": "^0.24.0"
+  }
+}
