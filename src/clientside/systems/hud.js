@@ -2,7 +2,7 @@ import { TEAM_HUNTED, TEAM_HUNTER } from "../../shared/constants/Team";
 import { DUMMY_TYPE_GAME } from "../../shared/constants/DummyType";
 import { STATE_WAITING, STATE_PLAYING, STATE_ENDED } from "../../shared/constants/State";
 import { REASON_NO_HUNTED_LEFT, REASON_NO_HUNTER_LEFT, REASON_ROUND_TIME } from "../../shared/constants/EndReason";
-import { runScaleformMethod, waitFor } from "../util";
+import { runScaleformMethod } from "../util";
 
 // @ts-ignore - this is an external resource
 const timerBarPool = require("timerbars");
@@ -88,7 +88,7 @@ async function init() {
 
     // load midsized_message
     scaleformHandle = mp.game.graphics.requestScaleformMovie("midsized_message");
-    await waitFor(() => mp.game.graphics.hasScaleformMovieLoaded(scaleformHandle));
+    await mp.game.waitForAsync(() => mp.game.graphics.hasScaleformMovieLoaded(scaleformHandle), 3000);
 
     // there is only one dummy of DUMMY_TYPE_GAME type, read data from it
     mp.dummies.forEachByType(DUMMY_TYPE_GAME, dummy => {

@@ -1,4 +1,4 @@
-import { waitFor, runScaleformMethod } from "../util";
+import { runScaleformMethod } from "../util";
 
 // script constants
 const CAMERA_DATA = [
@@ -119,7 +119,7 @@ async function onSpectatorStatusChange(entity, newStatus) {
 
         // prepare security_cam
         scaleformHandle = mp.game.graphics.requestScaleformMovie("security_cam");
-        await waitFor(() => mp.game.graphics.hasScaleformMovieLoaded(scaleformHandle));
+        await mp.game.waitForAsync(() => mp.game.graphics.hasScaleformMovieLoaded(scaleformHandle), 3000);
 
         runScaleformMethod(scaleformHandle, "SET_LAYOUT", 0);
         runScaleformMethod(scaleformHandle, "SET_LOCATION", CAMERA_DATA[cameraIndex].name);

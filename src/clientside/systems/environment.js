@@ -1,5 +1,3 @@
-import { waitFor } from "../util";
-
 // event handlers
 async function init() {
     mp.game.misc.setFadeOutAfterDeath(false);
@@ -21,7 +19,7 @@ async function init() {
     const ipls = ["cs1_02_cf_onmission1", "cs1_02_cf_onmission2", "cs1_02_cf_onmission3", "cs1_02_cf_onmission4"];
     const iplPromises = ipls.map(iplName => {
         mp.game.streaming.requestIpl(iplName);
-        return waitFor(() => mp.game.streaming.isIplActive(iplName));
+        return mp.game.waitForAsync(() => mp.game.streaming.isIplActive(iplName), 3000);
     });
 
     await Promise.all(iplPromises);
@@ -36,7 +34,7 @@ async function init() {
 
     const interiorPromises = interiorIds.map(interiorId => {
         mp.game.interior.pinInMemory(interiorId);
-        return waitFor(() => mp.game.interior.isReady(interiorId));
+        return mp.game.waitForAsync(() => mp.game.interior.isReady(interiorId), 3000);
     });
 
     await Promise.all(interiorPromises);
@@ -49,7 +47,7 @@ async function init() {
 
     // load hunter spawn anim
     mp.game.streaming.requestAnimDict("anim@mp_player_intcelebrationmale@chicken_taunt");
-    await waitFor(() => mp.game.streaming.hasAnimDictLoaded("anim@mp_player_intcelebrationmale@chicken_taunt"));
+    await mp.game.waitForAsync(() => mp.game.streaming.hasAnimDictLoaded("anim@mp_player_intcelebrationmale@chicken_taunt"), 3000);
 
     // let the server know
     mp.events.callRemote("nightshift::ready");
